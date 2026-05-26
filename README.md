@@ -9,7 +9,7 @@
 ## Install
 
 ```sh
-pip install prmcp
+pip install prmcp==0.1.0
 ```
 
 Or from source:
