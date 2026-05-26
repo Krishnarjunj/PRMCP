@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prmcp"
+version = "0.1.0"
+description = "Watch any Python SDK, auto-synthesize FastMCP tools for new resources, validate via LLM, and open a PR on the target MCP repo."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "prmcp contributors" }]
+keywords = ["mcp", "fastmcp", "sdk", "code-generation", "ast"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Code Generators",
+]
+dependencies = [
+  "fastmcp>=3.0",
+  "PyGithub>=2.0",
+  "jinja2>=3.1",
+  "openai>=1.50",
+  "rich>=13.0",
+  "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.scripts]
+prmcp = "prmcp.cli:main"
+prmcp-up = "prmcp.cli:up"
+prmcp-run = "prmcp.cli:run"
+prmcp-daemon = "prmcp.cli:daemon"
+prmcp-ci-watcher = "prmcp.cli:ci_watcher"
+prmcp-tail = "prmcp.cli:tail"
+
+[project.urls]
+Homepage = "https://github.com/your-org/prmcp"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["prmcp*"]
+
+[tool.setuptools.package-data]
+prmcp = ["templates/*.j2"]

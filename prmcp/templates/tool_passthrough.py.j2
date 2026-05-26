@@ -1,0 +1,8 @@
+@mcp.tool()
+def {{ tool_name }}({{ signature }}) -> {{ returns }}:
+    {{ docstring_block }}
+    try:
+        response = {{ client_expression }}.{{ client_attr }}.{{ sdk_method }}({{ kwargs }})
+        return getattr(response, "__dict__", response)
+    except {{ exception_class }} as e:
+        return {"error": str(e)}

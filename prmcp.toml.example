@@ -1,0 +1,48 @@
+# prmcp.toml — written by `prmcp init`. Edit and commit this file.
+
+[sdk]
+# Local path OR "owner/repo" GitHub slug (cloned into .prmcp/sdk-source/).
+source = "stripe/stripe-python"
+
+# Glob (relative to the resolved SDK root) for the resource modules.
+resources_glob = "stripe/api_resources/*.py"
+
+# Class names that mark "this is a resource". Empty list ⇒ treat every
+# public class with public methods as a resource.
+resource_base_classes = ["APIResource", "ListableAPIResource"]
+
+# Python import name of the SDK package (used inside generated tools).
+import_module = "stripe"
+
+# Expression that builds a client inside each generated tool. This is
+# whatever you would type in user code to make a usable client instance.
+client_expression = "stripe"
+
+# Exception class to catch around each SDK call inside generated tools.
+exception_class = "stripe.error.StripeError"
+
+# Optional: file inside the SDK whose `Client.__init__` assigns each
+# resource class to `self.<attr>`. Used to translate ClassName → attr.
+# client_path = "stripe/stripe_client.py"
+
+[mcp]
+target_repo = "myorg/my-mcp"
+base_branch = "main"
+tool_dir    = "tools"
+
+[llm]
+model = "gpt-4o-mini"
+# base_url = "https://api.openai.com/v1"
+
+[ci]
+# watched_repo = "owner/repo"               # optional
+workflow = "prmcp.yml"
+poll_interval_seconds = 30
+
+[daemon]
+poll_interval_seconds = 2.0
+debounce_seconds      = 3.0
+
+[pipeline]
+trace_path = "/tmp/prmcp-trace.jsonl"
+dry_run    = true

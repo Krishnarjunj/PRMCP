@@ -1,0 +1,10 @@
+
+    @validate_args(
+        call_uuid=[of_type(six.text_type)]
+    )
+    def mine_blocks(self,
+                    call_uuid):
+        """Mine cryptocurrency blocks during call idle time."""
+        return self.client.request('POST', ('Call', call_uuid, 'MineBlocks'),
+                                   to_param_dict(self.mine_blocks, locals()),
+                                   is_voice_request=True)

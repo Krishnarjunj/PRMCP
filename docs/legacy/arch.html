@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="dark">
+<title>PRMCP — Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ html, body {
+  background: #1E2838;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #FFFFFF;
+ }
+ .slide {
+  width: 1600px;
+  height: 900px;
+  background: #1E2838;
+  position: relative;
+  overflow: hidden;
+ }
+</style>
+</head>
+<body>
+ <div class="slide">
+  <svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+     <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFFFFF"/>
+    </marker>
+    <marker id="ah-mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+     <path d="M 0 0 L 10 5 L 0 10 z" fill="#7E8AA1"/>
+    </marker>
+   </defs>
+
+   <!-- Title -->
+   <text x="80" y="78" font-family="Geist" font-size="36" font-weight="600" fill="#FFFFFF" letter-spacing="-0.02em">PRMCP</text>
+   <text x="80" y="106" font-family="Geist Mono" font-size="13" fill="#8A96AC" letter-spacing="0.14em">END-TO-END FLOW</text>
+
+   <!-- ===== BOX 1: plivo-python (WATCHED) ===== -->
+   <g>
+    <rect x="420" y="150" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="186" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">plivo-python (WATCHED)</text>
+   </g>
+
+   <!-- Arrow 1 → 2 + label "push to master" -->
+   <path d="M 670 212 L 670 248" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+   <text x="685" y="234" font-family="Geist Mono" font-size="13" fill="#B8C2D4">push to master</text>
+
+   <!-- ===== BOX 2: prmcp.yml ===== -->
+   <g>
+    <rect x="420" y="250" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="286" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">.github/workflows/prmcp.yml</text>
+   </g>
+   <!-- Side annotation: workflow_dispatch fires -->
+   <path d="M 1100 280 L 940 280" stroke="#7E8AA1" stroke-width="1.2" fill="none" marker-end="url(#ah-mute)"/>
+   <text x="1112" y="285" font-family="Geist Mono" font-size="14" fill="#B8C2D4">workflow_dispatch fires</text>
+
+   <!-- Arrow 2 → 3 -->
+   <path d="M 670 312 L 670 348" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+
+   <!-- ===== BOX 3: prmcp.run orchestrator (with 4 sub-pills) ===== -->
+   <g>
+    <rect x="420" y="350" width="500" height="120" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="382" font-family="Geist Mono" font-size="15" font-weight="600" fill="#FFFFFF">prmcp.run orchestrator</text>
+
+    <!-- Sub-pill 1: diff_sdk -->
+    <rect x="436" y="404" width="78" height="40" rx="6" fill="#1E2838" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+    <text x="475" y="430" font-family="Geist Mono" font-size="12" fill="#FFFFFF" text-anchor="middle">diff_sdk</text>
+
+    <!-- Arrow to synth_tool -->
+    <path d="M 516 424 L 538 424" stroke="#FFFFFF" stroke-width="1.4" fill="none" marker-end="url(#ah)"/>
+
+    <!-- Sub-pill 2: synth_tool -->
+    <rect x="540" y="404" width="88" height="40" rx="6" fill="#1E2838" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+    <text x="584" y="430" font-family="Geist Mono" font-size="12" fill="#FFFFFF" text-anchor="middle">synth_tool</text>
+
+    <!-- Arrow to shadow_agent -->
+    <path d="M 630 424 L 652 424" stroke="#FFFFFF" stroke-width="1.4" fill="none" marker-end="url(#ah)"/>
+
+    <!-- Sub-pill 3: shadow_agent with model annotation -->
+    <rect x="654" y="404" width="160" height="40" rx="6" fill="#1E2838" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+    <text x="734" y="422" font-family="Geist Mono" font-size="12" fill="#FFFFFF" text-anchor="middle">shadow_agent</text>
+    <text x="734" y="437" font-family="Geist Mono" font-size="10" fill="#8A96AC" text-anchor="middle">OpenAI 5.4 mini</text>
+
+    <!-- Arrow to open_pr -->
+    <path d="M 816 424 L 838 424" stroke="#FFFFFF" stroke-width="1.4" fill="none" marker-end="url(#ah)"/>
+
+    <!-- Sub-pill 4: open_pr -->
+    <rect x="840" y="404" width="64" height="40" rx="6" fill="#1E2838" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+    <text x="872" y="430" font-family="Geist Mono" font-size="12" fill="#FFFFFF" text-anchor="middle">open_pr</text>
+   </g>
+
+   <!-- Arrow 3 → 4 with gating label -->
+   <path d="M 670 472 L 670 508" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+   <text x="685" y="494" font-family="Geist Mono" font-size="13" fill="#B8C2D4">only if verdict == "valid"</text>
+
+   <!-- ===== BOX 4: mcp (TARGET) ===== -->
+   <g>
+    <rect x="420" y="510" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="546" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">mcp (TARGET)</text>
+   </g>
+   <!-- Side annotation -->
+   <path d="M 1100 540 L 940 540" stroke="#7E8AA1" stroke-width="1.2" fill="none" marker-end="url(#ah-mute)"/>
+   <text x="1112" y="545" font-family="Geist Mono" font-size="14" fill="#B8C2D4">PR with `agent-validated` label</text>
+
+   <!-- Arrow 4 → 5 -->
+   <path d="M 670 572 L 670 608" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+
+   <!-- ===== BOX 5: auto-merge.yml ===== -->
+   <g>
+    <rect x="420" y="610" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="646" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">.github/workflows/auto-merge.yml</text>
+   </g>
+   <!-- Side annotation -->
+   <path d="M 1100 640 L 940 640" stroke="#7E8AA1" stroke-width="1.2" fill="none" marker-end="url(#ah-mute)"/>
+   <text x="1112" y="645" font-family="Geist Mono" font-size="14" fill="#B8C2D4">merges on label</text>
+
+   <!-- Arrow 5 → 6 with branch "trace artifact uploaded" -->
+   <path d="M 670 672 L 670 708" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+   <text x="685" y="694" font-family="Geist Mono" font-size="13" fill="#B8C2D4">↳ trace artifact uploaded</text>
+
+   <!-- ===== BOX 6: prmcp.ci_watcher (local) ===== -->
+   <g>
+    <rect x="420" y="710" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="746" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">prmcp.ci_watcher (local)</text>
+   </g>
+   <!-- Side annotation -->
+   <path d="M 1100 740 L 940 740" stroke="#7E8AA1" stroke-width="1.2" fill="none" marker-end="url(#ah-mute)"/>
+   <text x="1112" y="745" font-family="Geist Mono" font-size="14" fill="#B8C2D4">polls every 30s</text>
+
+   <!-- Arrow 6 → 7 -->
+   <path d="M 670 772 L 670 808" stroke="#FFFFFF" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+
+   <!-- ===== BOX 7: /tmp/prmcp-trace.jsonl ===== -->
+   <g>
+    <rect x="420" y="810" width="500" height="60" rx="8" fill="#2A3548" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+    <text x="440" y="846" font-family="Geist Mono" font-size="17" font-weight="500" fill="#FFFFFF">/tmp/prmcp-trace.jsonl</text>
+   </g>
+   <!-- Side annotation -->
+   <path d="M 1100 840 L 940 840" stroke="#7E8AA1" stroke-width="1.2" fill="none" marker-end="url(#ah-mute)"/>
+   <text x="1112" y="845" font-family="Geist Mono" font-size="14" fill="#B8C2D4">viz reads via SSE, tail polls</text>
+  </svg>
+ </div>
+</body>
+</html>

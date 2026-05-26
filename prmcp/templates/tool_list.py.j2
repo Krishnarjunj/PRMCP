@@ -1,0 +1,9 @@
+@mcp.tool()
+def {{ tool_name }}({{ signature }}) -> {{ returns }}:
+    {{ docstring_block }}
+    try:
+        response = {{ client_expression }}.{{ client_attr }}.{{ sdk_method }}({{ kwargs }})
+        items = list(response) if response is not None else []
+        return {"items": [getattr(i, "__dict__", i) for i in items]}
+    except {{ exception_class }} as e:
+        return {"error": str(e)}
